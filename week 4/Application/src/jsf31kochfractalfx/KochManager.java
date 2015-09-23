@@ -27,25 +27,37 @@ public class KochManager implements Observer {
     }
 
     public void changeLevel(int nxt) {
+
         koch.setLevel(nxt);
+        edges.clear();
+        TimeStamp time = new TimeStamp();
+        time.setBegin();
+
+        koch.generateLeftEdge();
+        koch.generateBottomEdge();
+        koch.generateRightEdge();
+
+        time.setEnd();
+        application.setTextCalc(time.toString().substring(20));
+
         drawEdges();
     }
 
 
     public void drawEdges() {
+
+
+        application.clearKochPanel();
         TimeStamp time = new TimeStamp();
         time.setBegin();
-        edges.clear();
-        application.clearKochPanel();
-        koch.generateLeftEdge();
-        koch.generateBottomEdge();
-        koch.generateRightEdge();
+
         for(Edge e : edges)
         {
             application.drawEdge(e);
         }
         time.setEnd();
-        application.setTextCalc(time.toString().substring(20));
+
+        application.setTextDraw(time.toString().substring(20));
         application.setTextNrEdges(edges.size() + "");
     }
 

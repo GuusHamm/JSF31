@@ -10,6 +10,8 @@
 *.war
 *.ear
 
+/week 4/Console Application/.idea
+/week 4/.idea
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
