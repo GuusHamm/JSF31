@@ -18,7 +18,7 @@ public class Reader {
         }
         if (System.getProperty("os.name").equals("Windows"))
         {
-            properties.load(new FileInputStream("C:/env.properties"));
+            properties.load(new FileInputStream("C:/Program Files/env.properties"));
         }
 
 //        Enumeration e = properties.propertyNames();

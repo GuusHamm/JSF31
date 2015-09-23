@@ -7,11 +7,13 @@ package calculate;
 
 import javafx.scene.paint.Color;
 
+import java.util.Observable;
+
 /**
  *
  * @author Peter Boots
  */
-public class Edge {
+public class Edge extends Observable {
     public double X1, Y1, X2, Y2;
     public Color color;
     
