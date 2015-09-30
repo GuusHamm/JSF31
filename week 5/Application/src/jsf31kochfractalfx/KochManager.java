@@ -1,6 +1,7 @@
 package jsf31kochfractalfx;
 
 import calculate.Edge;
+import calculate.EdgeEnum;
 import calculate.KochFractal;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import timeutil.TimeStamp;
  * Created by linux on 23-9-15.
  */
 public class KochManager implements Observer {
+
     private jsf31kochfractalfx.JSF31KochFractalFX application;
     private KochFractal koch1;
     private KochFractal koch2;
@@ -33,7 +35,8 @@ public class KochManager implements Observer {
 
     }
 
-    public void changeLevel(int nxt) {
+    public void changeLevel(int nxt)
+    {
 
         koch1.setLevel(nxt);
         koch2.setLevel(nxt);
@@ -64,7 +67,11 @@ public class KochManager implements Observer {
         time.setEnd();
         application.setTextCalc(time.toString().substring(20));
 
-       application.requestDrawEdges();
+        application.requestDrawEdges();
+        time.setEnd();
+        application.setTextCalc(time.toString().substring(20));
+
+        drawEdges();
     }
 
 
@@ -103,3 +110,6 @@ public class KochManager implements Observer {
 
 
 }
+
+
+

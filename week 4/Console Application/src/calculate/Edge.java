@@ -8,6 +8,7 @@ package calculate;
 import javafx.scene.paint.Color;
 
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
@@ -23,5 +24,10 @@ public class Edge extends Observable {
         this.X2 = X2;
         this.Y2 = Y2;
         this.color = color;
+    }
+
+    @Override
+    public synchronized void addObserver(Observer o) {
+        super.addObserver(o);
     }
 }

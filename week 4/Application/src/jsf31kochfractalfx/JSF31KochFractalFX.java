@@ -214,7 +214,7 @@ public class JSF31KochFractalFX extends Application {
     public void setTextDraw(String text) {
         labelDrawText.setText(text);
     }
-    
+
     public void requestDrawEdges() {
         Platform.runLater(new Runnable(){
             @Override

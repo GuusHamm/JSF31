@@ -6,22 +6,23 @@ import java.util.Observer;
 /**
  * Created by linux on 23-9-15.
  */
-public class Main implements Observer{
+public class Main {
     public static void main(String[] args){
         KochFractal kochFractal = new KochFractal();
 
-        kochFractal.setLevel(1);
+        KochFractalObserver kochFractalObserver = new KochFractalObserver();
+        kochFractal.addObserver(kochFractalObserver);
+
+        kochFractal.setLevel(2);
 
         kochFractal.generateLeftEdge();
         kochFractal.generateBottomEdge();
         kochFractal.generateRightEdge();
+        kochFractal.notifyObservers();
 
 
 
 
-    }
-
-    public void update(Observable o, Object arg) {
 
     }
 }
