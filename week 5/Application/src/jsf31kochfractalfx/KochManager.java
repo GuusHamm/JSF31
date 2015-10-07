@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import jdk.nashorn.internal.ir.RuntimeNode;
 import timeutil.TimeStamp;
 
 /**
@@ -37,7 +38,6 @@ public class KochManager implements Observer {
 
     public void changeLevel(int nxt)
     {
-
         koch1.setLevel(nxt);
         koch2.setLevel(nxt);
         koch3.setLevel(nxt);
@@ -70,7 +70,6 @@ public class KochManager implements Observer {
         application.requestDrawEdges();
         time.setEnd();
         application.setTextCalc(time.toString().substring(20));
-
         drawEdges();
     }
 
