@@ -4,6 +4,7 @@ import calculate.Edge;
 import calculate.EdgeEnum;
 import calculate.KochFractal;
 
+import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -21,14 +22,15 @@ public class KochManager implements Observer {
     private KochFractal koch2;
     private KochFractal koch3;
     private ArrayList<Edge> edges = new ArrayList<>();
-    private int count =0;
+    private int count =1;
+    TimeStamp time = new TimeStamp();
 
     public KochManager(jsf31kochfractalfx.JSF31KochFractalFX application) {
 
         this.application = application;
-        koch1 = new KochFractal(KochFractal.position.BOTTOM);
-        koch2 = new KochFractal(KochFractal.position.LEFT);
-        koch3 = new KochFractal(KochFractal.position.RIGHT);
+        koch1 = new KochFractal(KochFractal.position.BOTTOM, this);
+        koch2 = new KochFractal(KochFractal.position.LEFT, this);
+        koch3 = new KochFractal(KochFractal.position.RIGHT, this);
 
         koch1.addObserver(this);
         koch2.addObserver(this);
@@ -54,23 +56,23 @@ public class KochManager implements Observer {
         t1.start();
         t2.start();
         t3.start();
-        try
-        {
-            t1.join();
-            t2.join();
-            t3.join();
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
-        time.setEnd();
-        application.setTextCalc(time.toString().substring(20));
-
-        application.requestDrawEdges();
-        time.setEnd();
-        application.setTextCalc(time.toString().substring(20));
-        drawEdges();
+//        try
+//        {
+//            t1.join();
+//            t2.join();
+//            t3.join();
+//        }
+//        catch (InterruptedException e)
+//        {
+//            e.printStackTrace();
+//        }
+//        time.setEnd();
+//        application.setTextCalc(time.toString().substring(20));
+//
+//        application.requestDrawEdges();
+//        time.setEnd();
+//        application.setTextCalc(time.toString().substring(20));
+//        drawEdges();
     }
 
 
@@ -106,7 +108,22 @@ public class KochManager implements Observer {
         edges.add(e);
     }
 
+    public synchronized void addCount()
+    {
+        count++;
+        if(count==3)
+        {
+            drawEdges();
+            time.setEnd();
+            application.setTextCalc(time.toString().substring(20));
 
+            application.requestDrawEdges();
+
+            time.setEnd();
+            application.setTextCalc(time.toString().substring(20));
+            count=1;
+        }
+    }
 
 }
 

@@ -6,6 +6,7 @@ package calculate;
 
 import java.util.Observable;
 import javafx.scene.paint.Color;
+import jsf31kochfractalfx.KochManager;
 
 /**
  *
@@ -20,6 +21,7 @@ public class KochFractal extends Observable implements Runnable   {
     private float hue;          // Hue value of color for next edge
     private boolean cancelled;  // Flag to indicate that calculation has been cancelled
     position side;
+    KochManager manager ;
 
     public KochFractal(EdgeEnum edgeEnum) {
         this.edgeEnum = edgeEnum;
@@ -102,6 +104,8 @@ public class KochFractal extends Observable implements Runnable   {
         {
             generateRightEdge();
         }
+        manager.addCount();
+
     }
     public enum position
     {
@@ -109,9 +113,10 @@ public class KochFractal extends Observable implements Runnable   {
         RIGHT,
         BOTTOM
     }
-    public KochFractal(position p)
+    public KochFractal(position p, KochManager k)
     {
         side = p;
+        manager=k;
     }
 
 
