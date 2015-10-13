@@ -4,16 +4,17 @@
  */
 package calculate;
 
-import java.util.Observable;
 import javafx.scene.paint.Color;
 import jsf31kochfractalfx.KochManager;
+
+import java.util.Observable;
 
 /**
  *
  * @author Peter Boots
  */
 
-public class KochFractal extends Observable implements Runnable   {
+public class KochFractal extends Observable  {
 
 
     private int level = 1;      // The current level of the fractal
@@ -89,24 +90,24 @@ public class KochFractal extends Observable implements Runnable   {
         return nrOfEdges;
     }
 
-    @Override
-    public void run()
-    {
-        if(side == position.BOTTOM)
-        {
-            generateBottomEdge();
-        }
-        else if (side == position.LEFT)
-        {
-            generateLeftEdge();
-        }
-        else if (side == position.RIGHT)
-        {
-            generateRightEdge();
-        }
-        manager.addCount();
-
-    }
+//    @Override
+//    public void run()
+//    {
+//        if(side == position.BOTTOM)
+//        {
+//            generateBottomEdge();
+//        }
+//        else if (side == position.LEFT)
+//        {
+//            generateLeftEdge();
+//        }
+//        else if (side == position.RIGHT)
+//        {
+//            generateRightEdge();
+//        }
+//        manager.addCount();
+//
+//    }
     public enum position
     {
         LEFT,
