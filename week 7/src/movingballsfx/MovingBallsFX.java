@@ -33,6 +33,8 @@ public class MovingBallsFX extends Application {
     private int radius = 10;
     private int minCsX = (maxX + minX) / 2 - 100;
     private int maxCsX = (maxX + minX) / 2 + 100;
+    private BallMonitor ballMonitor = new BallMonitor();
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -109,7 +111,7 @@ public class MovingBallsFX extends Application {
             // Reader selected: new red ball
             Ball b = new Ball(minX, maxX, minCsX, maxCsX, y, Color.RED);
             ballArray[index] = b;
-            Thread t = new Thread(new BallRunnable(b));
+            Thread t = new Thread(new BallRunnable(b,ballMonitor));
             threadArray[index] = t;
             circleArray[index].setVisible(true);
             t.start();
@@ -117,7 +119,7 @@ public class MovingBallsFX extends Application {
             // Writer selected: new blue ball
             Ball b = new Ball(minX, maxX, minCsX, maxCsX, y, Color.BLUE);
             ballArray[index] = b;
-            Thread t = new Thread(new BallRunnable(b));
+            Thread t = new Thread(new BallRunnable(b,this.ballMonitor));
             threadArray[index] = t;
             circleArray[index].setVisible(true);
             t.start();
@@ -171,14 +173,14 @@ public class MovingBallsFX extends Application {
             try {
                 while (true) {
                     Thread.sleep(20);
-                    Platform.runLater(new Runnable(){
+                    Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
                             updateCircles();
                         }
                     });
                 }
-            } catch (InterruptedException ex) {  
+            } catch (InterruptedException ex) {
             }
         }
     }

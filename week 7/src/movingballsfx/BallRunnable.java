@@ -4,6 +4,8 @@
  */
 package movingballsfx;
 
+import javafx.scene.paint.Color;
+
 /**
  *
  * @author Peter Boots
@@ -11,9 +13,11 @@ package movingballsfx;
 public class BallRunnable implements Runnable {
 
     private Ball ball;
+    private BallMonitor ballMonitor;
 
-    public BallRunnable(Ball ball) {
+    public BallRunnable(Ball ball,BallMonitor ballMonitor) {
         this.ball = ball;
+        this.ballMonitor = ballMonitor;
     }
 
     @Override
@@ -21,7 +25,24 @@ public class BallRunnable implements Runnable {
         while (!Thread.currentThread().isInterrupted()) {
             try {
                 ball.move();
-                   
+
+                if (ball.isEnteringCs()) {
+                    if (ball.getColor() == Color.RED){
+                        ballMonitor.enterReader();
+                    }
+                    else {
+                        ballMonitor.enterWriter();
+                    }
+                }
+                if (ball.isLeavingCs()){
+                    if (ball.getColor() == Color.RED){
+                        ballMonitor.exitReader();
+                    }
+                    else {
+                        ballMonitor.exitWriter();
+                    }
+                }
+
                 Thread.sleep(ball.getSpeed());
                 
             } catch (InterruptedException ex) {
