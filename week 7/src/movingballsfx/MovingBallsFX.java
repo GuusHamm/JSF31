@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 public class MovingBallsFX extends Application {
     
     private Thread threadDraw;
+    private BallRunnable[] ballRunnables = new BallRunnable[10];
     private Ball[] ballArray = new Ball[10];
     private Thread[] threadArray = new Thread[10];
     private CheckBox[] checkBoxArray = new CheckBox[10];
@@ -111,7 +112,9 @@ public class MovingBallsFX extends Application {
             // Reader selected: new red ball
             Ball b = new Ball(minX, maxX, minCsX, maxCsX, y, Color.RED);
             ballArray[index] = b;
-            Thread t = new Thread(new BallRunnable(b,ballMonitor));
+            BallRunnable br = new BallRunnable(b,ballMonitor);
+            ballRunnables[index] = br;
+            Thread t = new Thread(br);
             threadArray[index] = t;
             circleArray[index].setVisible(true);
             t.start();
@@ -119,13 +122,16 @@ public class MovingBallsFX extends Application {
             // Writer selected: new blue ball
             Ball b = new Ball(minX, maxX, minCsX, maxCsX, y, Color.BLUE);
             ballArray[index] = b;
-            Thread t = new Thread(new BallRunnable(b,this.ballMonitor));
+            BallRunnable br = new BallRunnable(b,ballMonitor);
+            ballRunnables[index] = br;
+            Thread t = new Thread(br);
             threadArray[index] = t;
             circleArray[index].setVisible(true);
             t.start();
         } else {
+            ballRunnables[index].setIsInterrupted(true);
             // Reader or writer deselected: remove ball
-            threadArray[index].interrupt();
+            //threadArray[index].interrupt();
             threadArray[index] = null;
             ballArray[index] = null;
             circleArray[index].setVisible(false);

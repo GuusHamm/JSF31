@@ -1,7 +1,8 @@
 package movingballsfx;
 
-import java.util.Random;
 import javafx.scene.paint.Color;
+
+import java.util.Random;
 
 public class Ball {
 
@@ -52,4 +53,5 @@ public class Ball {
     public boolean isLeavingCs() {
         return xPos == maxCsX;
     }
+
 }
